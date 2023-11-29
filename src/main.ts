@@ -22,10 +22,10 @@ async function bootstrap() {
 
   // Swagger Init
   const config = new DocumentBuilder()
-    .setTitle('LuminaLearn V1')
-    .setDescription('LuminaLearn API Documentation')
+    .setTitle('IBA Training V1')
+    .setDescription('IBA Training API Documentation')
     .setVersion('1.0')
-    .addTag('LuminaLearn')
+    .addTag('IBA Training')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

@@ -21,7 +21,7 @@ export class ChildrenController {
   constructor(private childrenService: ChildrenService) {}
 
   @Post()
-  @Roles([Role.Admin, Role.Manager])
+  @Roles([Role.Admin])
   @ApiOperation({ description: 'Create a new Children' })
   async create(@Body() createSchoolDto: any, @Request() req) {
     return this.childrenService.create(createSchoolDto, req.user);
@@ -49,7 +49,7 @@ export class ChildrenController {
   }
 
   @Put('/:id')
-  @Roles([Role.Admin, Role.Manager])
+  @Roles([Role.Admin])
   @ApiOperation({ description: 'Update child information by ID' })
   async updateChild(@Param('id') id: string, @Body() payload: any) {
     return this.childrenService.update(id, payload);

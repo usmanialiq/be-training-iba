@@ -26,6 +26,7 @@ async function bootstrap() {
     .setDescription('IBA Training API Documentation')
     .setVersion('1.0')
     .addTag('IBA Training')
+    .setExternalDoc('Postman Collection', '/docs-json')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);

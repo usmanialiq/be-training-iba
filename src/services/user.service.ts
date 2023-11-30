@@ -46,31 +46,31 @@ export class UserService {
       if (!saveUser) {
         throw 'Failed to save the user';
       }
-      const sendWelcomeEmail = await this.sesService.sendTemplateEmail(
-        saveUser.email,
-        'WelcomeToWorkHall',
-        { name: `${saveUser.firstName} ${saveUser.lastName}` },
-      );
-      if (!sendWelcomeEmail) {
-        this.logger.error(
-          'AWS SES ===> Failed to send welcome email:',
-          saveUser.email,
-        );
-      }
-      const sendVerifyUserEmail = await this.sesService.sendTemplateEmail(
-        saveUser.email,
-        'VerifyAccount',
-        {
-          name: `${saveUser.firstName} ${saveUser.lastName}`,
-          link: `https://api.workhall.co/v1/users/verify/${saveUser.uuid}`,
-        },
-      );
-      if (!sendVerifyUserEmail) {
-        this.logger.error(
-          'AWS SES ===> Failed to send verify user email:',
-          saveUser.email,
-        );
-      }
+      // const sendWelcomeEmail = await this.sesService.sendTemplateEmail(
+      //   saveUser.email,
+      //   'WelcomeToWorkHall',
+      //   { name: `${saveUser.firstName} ${saveUser.lastName}` },
+      // );
+      // if (!sendWelcomeEmail) {
+      //   this.logger.error(
+      //     'AWS SES ===> Failed to send welcome email:',
+      //     saveUser.email,
+      //   );
+      // }
+      // const sendVerifyUserEmail = await this.sesService.sendTemplateEmail(
+      //   saveUser.email,
+      //   'VerifyAccount',
+      //   {
+      //     name: `${saveUser.firstName} ${saveUser.lastName}`,
+      //     link: `https://api.workhall.co/v1/users/verify/${saveUser.uuid}`,
+      //   },
+      // );
+      // if (!sendVerifyUserEmail) {
+      //   this.logger.error(
+      //     'AWS SES ===> Failed to send verify user email:',
+      //     saveUser.email,
+      //   );
+      // }
       return 1;
     } catch (error: any) {
       this.logger.error(error);

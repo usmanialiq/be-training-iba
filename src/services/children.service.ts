@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Children, ChildrenDocument } from '../schemas/children.schema';
 import pagination from '../middleware/pagination.middleware';
+import { CreateChildDto } from '../interfaces/children/createChld.dto';
 
 @Injectable()
 export class ChildrenService {
@@ -13,18 +14,18 @@ export class ChildrenService {
 
   private readonly logger = new Logger(ChildrenService.name);
 
-  async create(createChildDto: any, user: any) {
+  async create(createChildDto: CreateChildDto, user: any) {
     try {
       const newChild = new this.childrenRepository({
         ...createChildDto,
-        createdBy: user.id,
+        parent: user.id,
       });
       const saveChild = await newChild.save();
 
       if (!saveChild) {
         throw 'Failed to register the child, please try again';
       }
-      return 1;
+      return 'Created child record successfully';
     } catch (error: any) {
       this.logger.error(error);
       throw new HttpException(error.toString(), HttpStatus.BAD_REQUEST);
@@ -40,7 +41,6 @@ export class ChildrenService {
         .limit(paginatedQuery.limit)
         .skip(paginatedQuery.skip)
         .sort({ createdAt: -1 })
-        .populate('branch')
         .populate('parent')
         .exec();
 

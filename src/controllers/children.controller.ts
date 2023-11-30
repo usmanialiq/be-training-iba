@@ -11,7 +11,7 @@ import {
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { ChildrenService } from '../services';
 import { Children } from '../schemas/children.schema';
-import {} from '../interfaces';
+import { CreateChildDto } from '../interfaces/children/createChld.dto';
 import { Roles } from '../common/role.decorator';
 import { Role } from '../common/role.enum';
 
@@ -21,9 +21,9 @@ export class ChildrenController {
   constructor(private childrenService: ChildrenService) {}
 
   @Post()
-  @Roles([Role.Admin])
+  @Roles([Role.Parent])
   @ApiOperation({ description: 'Create a new Children' })
-  async create(@Body() createSchoolDto: any, @Request() req) {
+  async create(@Body() createSchoolDto: CreateChildDto, @Request() req) {
     return this.childrenService.create(createSchoolDto, req.user);
   }
 
